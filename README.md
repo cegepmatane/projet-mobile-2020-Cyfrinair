@@ -4,4 +4,4 @@
 
 ### Résumé du projet
 
-Nous allons réaliser un jeu 2d (runner) qui va utiliser la librairie *libgdx*, en java developper sur Android Studio.
+Nous allons réaliser un jeu 2D (runner) qui va utiliser la librairie *libgdx*, en Java developpé sur Android Studio.
