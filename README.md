@@ -1,1 +1,3 @@
 # projet-initial
+
+Guillaume Vernaz
