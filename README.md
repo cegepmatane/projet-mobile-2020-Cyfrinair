@@ -1,4 +1,4 @@
-# projet-initial
+# Cyfrinair
 
 ## Guillaume Vernaz, Kenny Marechal, Hy-Vong Georges Dit Rap, Maxime Daigle Vigneault
 
