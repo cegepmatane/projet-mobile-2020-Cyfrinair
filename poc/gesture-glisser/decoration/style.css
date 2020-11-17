@@ -1,0 +1,50 @@
+:root {
+    --theme-rouge: #5c0509;
+    --theme-blanc-transparent: rgba(255,255,255,0.3);
+    --theme-bleu-pale: rgb(4, 60, 82);
+    --theme-bleu-fonce: rgba(63,155,191,1);
+    --theme-vert: #0b5014;
+    --theme-blanc: white;
+    --theme-noir: black;
+  
+    --theme-bordure-rondeur: 0.5rem;
+  }
+.page {
+    position:relative;
+    background-color:var(--theme-bleu-pale);
+    padding:5%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:right bottom;
+    background-attachment:fixed;
+    background-size: 50%;
+    color:var(--theme-rouge);
+  }
+  .page1 {
+    position:relative;
+    background-color:var(--theme-vert);
+    padding:5%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:right bottom;
+    background-attachment:fixed;
+    background-size: 50%;
+    color:var(--theme-rouge);
+  }
+  .page2 {
+    position:relative;
+    background-color:var(--theme-noir);
+    padding:5%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:right bottom;
+    background-attachment:fixed;
+    background-size: 50%;
+    color:var(--theme-rouge);
+  }
