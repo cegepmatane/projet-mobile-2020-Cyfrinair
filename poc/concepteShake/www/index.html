@@ -15,38 +15,15 @@ body {
 }
 </style>
 <script type="text/javascript" src="js/shake.js"></script>
+<script src="js/vue/vueShake.js"></script>
 </head>
 <body>
 
-<h1>Shake to Undo</h1>
-<h2>for your mobile web app</h2>
+    <script type="plain/text" id="html-vue-shake">
+        <h1>Shake</h1>
+        <h2>pour votre app mobile</h2>
+    </script>
 
-<p>Shake your iPhone/iPad to see a custom action.</p>
-<p>Works on iOS +4.2.1, Android 4.0.3 (default browser), Opera Mobile (Android), BlackBerry PlayBook 2.0</p>
-
-<p><a href="http://dev.w3.org/geo/api/spec-source-orientation">W3C DeviceOrientation Event Specification</a></p>
-
-<script type="text/javascript">
-window.onload = function() {
-
-    //create a new instance of shake.js.
-    var myShakeEvent = new Shake({
-        threshold: 15
-    });
-
-    // start listening to device motion
-    myShakeEvent.start();
-
-    // register a shake event
-    window.addEventListener('shake', shakeEventDidOccur, false);
-
-    //shake event callback
-    function shakeEventDidOccur () {
-
-        //put your own code here etc.
-        alert('Shake!');
-    }
-};
-</script>
+    <script defer src="js/Application.js"></script>
 </body>
 </html>
