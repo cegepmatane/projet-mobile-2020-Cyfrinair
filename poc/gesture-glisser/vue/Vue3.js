@@ -1,7 +1,7 @@
 class Vue3{
     constructor(){
         this.html = document.getElementById("html-vue-3").innerHTML;
-        this.mouvement = null;
+        this.actionMouvementGlisseVersGauche = null;
         this.enGlisse = false;
     }
 
@@ -11,29 +11,33 @@ class Vue3{
     }
     
 
-    initialiserActionMouvement(mouvement){
-        this.mouvement = mouvement;
+    initialiserActionMouvement(actionMouvementGlisseVersGauche){
+        this.actionMouvementGlisseVersGauche = actionMouvementGlisseVersGauche;
     }
 
     initialiserCaptureMouvementGlisser(){
-        var touchArea = document.getElementById('toucharea');
-        var region = new ZingTouch.Region(touchArea);
-        var glisse = new ZingTouch.Swipe({
-            numInputs: 1,
-            maxRestTime: 100,
-            escapeVelocity: 0.25
+        const nombrePointEntree = 1;
+        const tempsMouvementGlisse = 100;
+        const vitesseMouvement = 0.25;
+        let touchArea = document.getElementById('toucharea');
+        let region = new ZingTouch.Region(touchArea);
+        let glisse = new ZingTouch.Swipe({
+            numInputs: nombrePointEntree,
+            maxRestTime: tempsMouvementGlisse,
+            escapeVelocity: vitesseMouvement
         });
 
-        region.bind(touchArea, glisse, (e) => this.confirmerGlisse(e));
+        region.bind(touchArea, glisse, (evenement) => this.confirmerGlisse(evenement));
     }
 
-    confirmerGlisse(e){
-        var direction = (e.detail.data[0].currentDirection);
+    confirmerGlisse(evenement){
+        const donneeDuMouvement = 0;
+        var direction = (evenement.detail.data[donneeDuMouvement].currentDirection);
         console.log(direction);
         if(direction > 180 && direction <= 360) // intervalle qui definit un swipe de gauche a droite
         {
             if(!this.enGlisse){
-                this.mouvement();
+                this.actionMouvementGlisseVersGauche();
                 this.enGlisse = true;
             }
         }
