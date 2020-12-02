@@ -25,7 +25,6 @@ class Vue1{
             maxRestTime: tempsMouvementGlisse,
             escapeVelocity: vitesseMouvement
         });
-
         region.bind(touchArea, glisse, (evenement) => this.confirmerGlisse(evenement));
     }
 
