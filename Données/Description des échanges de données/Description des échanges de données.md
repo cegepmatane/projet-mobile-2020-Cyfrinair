@@ -1,6 +1,6 @@
 # Description des échanges de données
 
-## Détail des champs du Model InfosCLient
+## Détail des champs du Model *InfosCLient*
 
 - id
 - website
