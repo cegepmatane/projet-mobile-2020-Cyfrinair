@@ -5,10 +5,13 @@ class Application{
 		
 		this.vueShake = vueShake;
 		
-		this.window.addEventListener("hashchange", () => this.naviguer());
-		
-		this.naviguer();
+		document.addEventListener("deviceready", () => this.intialiserNavigation(), false);
 	}
+
+	intialiserNavigation(){
+    		this.window.addEventListener("hashchange", () => this.naviguer());
+    		setTimeout(() =>this.naviguer(), 3000);
+    }
 	
 	naviguer(){
 		let hash = window.location.hash;
