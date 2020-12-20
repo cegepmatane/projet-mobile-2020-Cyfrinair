@@ -5,8 +5,8 @@ class VueAjouter{
         this.ajouterPass = null;
     }
 
-    initialiserAjout(AjouterPass){
-        this.AjouterPass = AjouterPass;
+    initialiserAjout(ajouterPass){
+        this.ajouterPass = ajouterPass;
     }
 
     afficher(){

@@ -17,7 +17,7 @@ class VuePrincipale{
         let listePassword = document.getElementById("liste-pass");
         const listePasswordItemHTML = listePassword.innerHTML;
         let listePasswordHTMLRemplacement = "";
-        console.log("password html " + listePasswordItemHTML);
+        //console.log("password html " + listePasswordItemHTML);
 
         for(var numPassword in this.listePasswordDonnee){
             let listePasswordItemHTMLRemplacement = listePasswordItemHTML;

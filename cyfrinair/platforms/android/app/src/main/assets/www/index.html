@@ -5,72 +5,59 @@
 
         <script src="modele/Password.js"></script>
         <script src="donnee/PasswordDAO.js"></script>
-
-        <script src="vue/VuePrincipale.js"></script>
         <script src="vue/VueAjouter.js"></script>
         <script src="vue/VueModifier.js"></script>
-
-        <script defer src="js/application.js"></script>
+        <script src="vue/VuePrincipale.js"></script>
+        <script defer src="js/Application.js"></script>
 
         <title>Page principale</title>
     </head>
     <body>
-
         <div>Chargement de l'application . . .</div>
-
         <script type="plain/text" id="html-vue-principale">
-            
             <div class="page">
-    
                 <h1>Principale</h1>
-    
                 <section id="section">
                     <ul id="liste-pass">
                       <li>
                         <div class="item">
-
                             <table class="t1">
-                                <tr><th>Site web</th><th>User</th><th>Mot de passe</th><th>Description</th></tr>
-                                    <div class="boite">
-                                
-                                        <tr>
-                                            <a href="#pass/{Password.id}" class="liste-pass-item">
-                                                <td>{Password.website}</td>
-                                                <td>{Password.user}</td>
-                                                <td>{Password.password}</td>
-                                                <td>{Password.description}</td>
-                                            </a>    
-                                        </tr>
-                                    </div>
+                                <tr>
+                                    <th>Site web</th>
+                                    <th>User</th>
+                                    <th>Mot de passe</th>
+                                    <th>Description</th>
+                                    <th>Modifier</th>
+                                </tr>
+                                    
+                                <div class="boite">
+                                    <tr>
+                                        <td>{Password.website}</td>
+                                        <td>{Password.user}</td>
+                                        <td>{Password.password}</td>
+                                        <td>{Password.description}</td>
+                                        <td><a href="#pass/{Password.id}" class="liste-pass-item">Modifier</a></td>
+                                    </tr>
+                                </div>
                             </table>       
                         </div>
                       </li>
                     </ul>
+                    <a href="#ajouter">Ajouter un item</a>
                 </section>
-
             </div>
-        
         </script>
 
         <script type="plain/text" id="html-vue-ajouter">
-        
             <div class="page">
-    
-                <h1>Ajouter</h1>            
-    
+                <h1>Ajouter</h1>
             </div>
-
         </script>
 
         <script type="plain/text" id="html-vue-modifier">
-        
             <div class="page">
-    
                 <h1>Modifier</h1>
-                
             </div>
-
         </script>
-
     </body>
 </html>
