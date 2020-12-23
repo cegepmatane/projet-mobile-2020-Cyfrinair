@@ -2,14 +2,15 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/application.css">
-
-        <script src="modele/Password.js"></script>
-        <script src="donnee/PasswordDAO.js"></script>
+        <script src="createjs/easeljs/lib/easeljs.min.js"></script>
+        <script src="createjs/tweenjs/lib/tweenjs.min.js"></script>
+        <script src="modele/InfosClient.js"></script>
+        <script src="donnee/InfosClientDAO.js"></script>
+        <script src="js/Configuration.js"></script>
         <script src="vue/VueAjouter.js"></script>
         <script src="vue/VueModifier.js"></script>
         <script src="vue/VuePrincipale.js"></script>
         <script defer src="js/Application.js"></script>
-
         <title>Page principale</title>
     </head>
     <body>
@@ -18,31 +19,7 @@
             <div class="page">
                 <h1>Principale</h1>
                 <section id="section">
-                    <ul id="liste-pass">
-                      <li>
-                        <div class="item">
-                            <table class="t1">
-                                <tr>
-                                    <th>Site web</th>
-                                    <th>User</th>
-                                    <th>Mot de passe</th>
-                                    <th>Description</th>
-                                    <th>Modifier</th>
-                                </tr>
-                                    
-                                <div class="boite">
-                                    <tr>
-                                        <td>{Password.website}</td>
-                                        <td>{Password.user}</td>
-                                        <td>{Password.password}</td>
-                                        <td>{Password.description}</td>
-                                        <td><a href="#pass/{Password.id}" class="liste-pass-item">Modifier</a></td>
-                                    </tr>
-                                </div>
-                            </table>       
-                        </div>
-                      </li>
-                    </ul>
+                    <canvas id="canvas-donnees"></canvas>
                     <a href="#ajouter">Ajouter un item</a>
                 </section>
             </div>

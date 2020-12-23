@@ -30,7 +30,22 @@ class InfosClientDAO{
           if (erreur !== null) {
             alert('Something went wrong: ' + erreur);
           } else {
-            listeInfosClientDonnee(data);
+            var listeInfosClient = [];
+            for(let position in data){
+
+              let infosClient = new InfosClient(data[position].id,
+                  data[position].site,
+                  data[position].utilisateur,
+                  data[position].description,
+                  data[position].template,
+                  data[position].type);
+
+              console.log(infosClient);
+
+              listeInfosClient[infosClient.id] = infosClient;
+            }
+
+            listeInfosClientDonnee(listeInfosClient);
           }
         });
     }

@@ -18,9 +18,11 @@ class Application {
     }
 
     afficherVue1(){
-        this.infosClientDAO.listerInfosClient((data)=>{this.vue1.initialiserListeInfosClient(data);
+        this.infosClientDAO.listerInfosClient((listeInfosClient)=>{
+            this.vue1.initialiserListeInfosClient(listeInfosClient);
             this.vue1.afficher();
-            this.vue1.enGlisse = false;});
+            this.vue1.enGlisse = false;
+        });
     }
 
     afficherVue2(){

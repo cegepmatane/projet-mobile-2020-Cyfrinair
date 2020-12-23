@@ -30,6 +30,8 @@ class Vue1{
 
     initialiserListeInfosClient(listeInfosClientDonnee){
         this.listeInfosClientDonnee = listeInfosClientDonnee;
+
+        console.log(this.listeInfosClientDonnee);
     }
 
     initialiserCaptureMouvementGlisser(){

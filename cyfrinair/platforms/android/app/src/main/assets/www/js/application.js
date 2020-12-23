@@ -1,11 +1,14 @@
 class Application{
-    constructor(window, passDAO, vuePrincipal, vueAjouter, vueModifier){
+    constructor(window, vuePrincipale, vueAjouter, vueModifier, infosClientDAO){
         this.window = window;
-        this.passDAO = passDAO;
-        this.vuePrincipal = vuePrincipal;
+        this.vuePrincipale = vuePrincipale;
         this.vueAjouter = vueAjouter;
         this.vueModifier = vueModifier;
+        this.infosClientDAO = infosClientDAO;
 
+        
+
+        //Callbacks
         this.vueAjouter.initialiserAjout(pass => this.ajouterPass(pass));
 
         this.window.addEventListener("hashchange", () => this.naviguer());
@@ -16,10 +19,11 @@ class Application{
         let hash = window.location.hash;
 
         if(!hash){
-
-            this.vuePrincipal.initialiserPrincipale(this.passDAO.lister());
-            this.vuePrincipal.afficher();
-
+            this.infosClientDAO.listerInfosClient((data)=>{
+                this.vuePrincipale.initialiserListeInfosClient(data);
+                this.vuePrincipale.afficher();
+                //this.vuePrincipale.enGlisse = false;}
+            });
         } 
         else if(hash.match(/^#ajouter/))
         {
@@ -38,4 +42,4 @@ class Application{
     }
 }
 
-new Application(window, new PasswordDAO(), new VuePrincipale(), new VueAjouter(), new VueModifier());
+new Application(window, new VuePrincipale(), new VueAjouter(), new VueModifier(), new InfosClientDAO());

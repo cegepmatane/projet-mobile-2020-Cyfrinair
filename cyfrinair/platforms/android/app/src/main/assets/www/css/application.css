@@ -38,3 +38,7 @@ label{
   margin-left: 10%;
   margin-right: 10%;
 }
+
+canvas{
+  width: 60%;
+}
