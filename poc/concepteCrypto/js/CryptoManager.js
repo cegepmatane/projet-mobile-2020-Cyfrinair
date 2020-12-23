@@ -4,20 +4,20 @@ class CryptoManager{
 		this.mpw;
 	}
 	
-	updateMPW(fullname, masterpassword) {
+	mettreAJourMPW(pseudo, motdepasse) {
 		
-		if (fullname == "" ||
-			masterpassword == "") {
+		if (pseudo == "" ||
+			motdepasse == "") {
 			this.mpw = null;
 			alert("Veuillez remplir les champs!");
 		} else {
-			this.mpw = new MPW(fullname, masterpassword, 3);
+			this.mpw = new MPW(pseudo, motdepasse, 3);
 
-			alert("session : " + fullname + " ouverte!");
+			alert("session : " + pseudo + " ouverte!");
 		}
 	}
 
-	getPassword(client) {
+	obtenirPassword(client) {
 		
 		if (!this.mpw) {
 			alert("Veuillez vous connecter!");
@@ -39,9 +39,9 @@ class CryptoManager{
 				console.log("type invalide!");
 		}
 
-		value.then(function (pass) {
+		value.then(function (motdepasse) {
 			//mot de passe generer
-			alert(pass);
+			alert(motdepasse);
 		}, function (err) {
 			alert(err.message);
 			console.log(err);

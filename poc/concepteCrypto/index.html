@@ -19,6 +19,10 @@
 	<script src="js/lib/ES6.js"></script>
 	<script src="js/CryptoManager.js"></script>
 	<script src="js/vue/vueCrypto.js"></script>
+	<script src="js/lib/setImmediate-polyfill.js"></script>
+	<script src="js/lib/pbkdf2.js"></script>
+	<script src="js/lib/scrypt.js"></script>
+	<script src="js/lib/mpw.js"></script>
 	<script defer src="js/Application.js"></script>
 </head>
 <body>
@@ -26,9 +30,9 @@
     <script type="plain/text" id="html-vue-crypto">
 		<h1>Crypto</h1>
 		
-		<p><label>Full name: <input id="fullname" placeholder="John Smith"></label></p>
-		<p><label>Master Password: <input id="masterpassword" type=password placeholder=Password></label></p>
-		<p><button id="login">login</button></p>
+		<p><label>Pseudo: <input id="fullname" placeholder="John Smith"></label></p>
+		<p><label>Mot de passe: <input id="masterpassword" type=password placeholder=Password></label></p>
+		<p><button id="connection">connection</button></p>
 		<br>
 		<p>test Echaffaud : </p>
 		<button id="testClient1">test Client #1</button>
