@@ -33,6 +33,9 @@ class VuePrincipale{
 
     initialiserElementsGraphiques()
     {
+        this.stage.canvas.width = window.innerWidth;
+        //Permet d'adapter la taille du canvas selon le nombre de données à afficher
+        this.stage.canvas.height = (Configuration.HAUTEUR_DONNEE + Configuration.MARGIN_DONNEE) * this.listeInfosClient.length;	
         /*
         let image = new Image();
         image.src = "img/lock-shape.svg"; 
@@ -40,7 +43,7 @@ class VuePrincipale{
         */
 
         //Sans changement de canvas, on appelle directement afficherCadresDonnees()
-        this.afficherCadresDonnees();
+        this.afficherCadresDonnees(null);
     }
 
     /*
@@ -66,18 +69,12 @@ class VuePrincipale{
     }
     */
 
-    afficherCadresDonnees()
+    afficherCadresDonnees(listeMdp)
     {
-        //Changement de canvas dans la vue
-        //this.stage = new createjs.Stage("canvas-donnees");
-
-        this.stage.canvas.width = window.innerWidth;
-        //Permet d'adapter la taille du canvas selon le nombre de données à afficher
-        this.stage.canvas.height = (Configuration.HAUTEUR_DONNEE + Configuration.MARGIN_DONNEE) * this.listeInfosClient.length;	
         //Construction de chaque donnée dans un cadre
         let index = 0;
         this.listeInfosClient.forEach(infosClient => {
-            this.afficherDonnee(infosClient, index, null);
+            this.afficherDonnee(infosClient, index, listeMdp);
             index++;
         });
     }
@@ -85,53 +82,27 @@ class VuePrincipale{
     afficherDonnee(infosClient, index, listeMotDePasse) 
     {
         //Construction du cadre
-        // let cadre = new createjs.Container();
-        //Fond du cadre
         let forme = new createjs.Shape();
         forme.width = this.stage.canvas.width;
         forme.height = Configuration.HAUTEUR_DONNEE;
         forme.y =  index*(Configuration.HAUTEUR_DONNEE + Configuration.MARGIN_DONNEE);
         forme.graphics.beginFill("grey").drawRect(0, 0, forme.width, forme.height);
-        
-        //Donnée: site web
-        let site = new createjs.Text("Site: " + infosClient.site, Configuration.FONT, "black");
-        site.textAlign = Configuration.ALIGNEMENT_GAUCHE;
-        site.x = forme.x + Configuration.POS_GAUCHE * forme.width;
-        site.y = forme.y + (forme.height/2 - site.getMeasuredHeight()/2);
-    
-        //Donnée: utilisateur
-        let utilisateur = new createjs.Text("Utilisateur: " + infosClient.utilisateur, Configuration.FONT, "black");
-        utilisateur.textAlign = Configuration.ALIGNEMENT_MILIEU;
-        utilisateur.x = forme.x + Configuration.POS_MILIEU * forme.width;
-        utilisateur.y = forme.y + (forme.height / 2 - utilisateur.getMeasuredHeight()/2);
-    
-         //Donnée: description
-         let description = new createjs.Text("Description: " + infosClient.description, Configuration.FONT, "black");
-         description.textAlign = Configuration.ALIGNEMENT_DROITE;
-         description.x = forme.x + Configuration.POS_DROITE * forme.width;
-         description.y = forme.y + (forme.height / 2 - description.getMeasuredHeight()/2);
 
-        //let info = creerInfo(forme, texte, alignement, position, )
-
-        //Ajout des éléments au cadre
-        // cadre.addChild(forme, site, mdp);
+        let site = this.creerInfo(forme, infosClient.site, Configuration.ALIGNEMENT_GAUCHE, Configuration.POS_GAUCHE);
+        let utilisateur = this.creerInfo(forme, infosClient.utilisateur, Configuration.ALIGNEMENT_MILIEU, Configuration.POS_MILIEU_GAUCHE);
+        let description = this.creerInfo(forme, infosClient.description, Configuration.ALIGNEMENT_DROITE, Configuration.POS_MILIEU_DROITE);
 
         forme.alpha = 0;
         this.stage.x = -forme.width;
         //Animations de slide gauche-droite et apparition
-        createjs.Tween.get(this.stage)
-            .to({x:0}, Configuration.DUREE_ANIMATION, createjs.Ease.quadOut);
-        createjs.Tween.get(forme)
-            .to({alpha:1}, Configuration.DUREE_ANIMATION);
+        createjs.Tween.get(this.stage).to({x:0}, Configuration.DUREE_ANIMATION, createjs.Ease.quadOut);
+        createjs.Tween.get(forme).to({alpha:1}, Configuration.DUREE_ANIMATION);
     
         if (listeMotDePasse != null){
-            let motdepasse = new createjs.Text("Mot De Passe: " + listeMotDePasse[index + 1], Configuration.FONT, "black");
-            motdepasse.textAlign = "right";
-            motdepasse.x = forme.x + 0.95 * forme.width;
-            motdepasse.y = forme.y + (forme.height / 2 - motdepasse.getMeasuredHeight()/2);
-            this.stage.addChild(forme, site, utilisateur, motdepasse);
+            let motDePasse = this.creerInfo(forme, listeMotDePasse[index + 1], Configuration.ALIGNEMENT_DROITE, Configuration.POS_DROITE);
+            this.stage.addChild(forme, site, utilisateur, description, motDePasse);
         } else {
-            this.stage.addChild(forme, site, utilisateur);
+            this.stage.addChild(forme, site, utilisateur, description);
         }
     }
 
@@ -155,13 +126,7 @@ class VuePrincipale{
                     console.log("FINI!!");
 
                     this.stage.removeAllChildren();
-
-                    let index = 0;
-                    this.listeInfosClient.forEach(infosClient => {
-                        this.afficherDonnee(infosClient, index, listeMotDePasse);
-                        index++;
-                    });
-
+                    this.afficherCadresDonnees(listeMotDePasse);
                 }
             });
         }
@@ -174,10 +139,15 @@ class VuePrincipale{
         document.getElementById('connection').disabled = false;
         document.getElementById('deconnection').disabled = true;
 
-        let index = 0;
-        this.listeInfosClient.forEach(infosClient => {
-            this.afficherDonnee(infosClient, index, null);
-            index++;
-        });
+        this.afficherCadresDonnees(null);
+    }
+
+    creerInfo(forme, valeurInfo, alignement, positionnement)
+    {
+        let information = new createjs.Text(valeurInfo, Configuration.FONT, "white");
+        information.textAlign = alignement;
+        information.x = forme.x + positionnement * forme.width;
+        information.y = forme.y + (forme.height / 2 - information.getMeasuredHeight()/2);
+        return information;
     }
 }
