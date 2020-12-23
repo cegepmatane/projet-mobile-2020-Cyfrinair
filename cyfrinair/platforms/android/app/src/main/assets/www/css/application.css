@@ -8,3 +8,33 @@ th, td{
     border: 1px solid black;
     padding: 10px;
   }
+
+#section_ajouter{
+  text-align: center;
+  
+}
+
+h1{
+  text-align: center;
+  margin: 2% 0 2% 0;
+}
+
+#input{
+  width:20%;
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 2%;
+}
+
+label{
+  width: 30%;
+}
+
+#mesBouttons{
+  text-align: center;
+}
+
+.button{
+  margin-left: 10%;
+  margin-right: 10%;
+}
