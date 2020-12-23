@@ -13,25 +13,6 @@ class VuePrincipale{
     afficher(){
         document.getElementsByTagName("body")[0].innerHTML = this.html;
 
-        /*
-        let listePassword = document.getElementById("liste-pass");
-        const listePasswordItemHTML = listePassword.innerHTML;
-        let listePasswordHTMLRemplacement = "";
-        //console.log("password html " + listePasswordItemHTML);
-
-        for(var numPassword in this.listePasswordDonnee){
-            let listePasswordItemHTMLRemplacement = listePasswordItemHTML;
-            listePasswordItemHTMLRemplacement = listePasswordItemHTMLRemplacement.replace("{Password.id}", this.listePasswordDonnee[numPassword].id);
-            listePasswordItemHTMLRemplacement = listePasswordItemHTMLRemplacement.replace("{Password.website}", this.listePasswordDonnee[numPassword].website);
-            listePasswordItemHTMLRemplacement = listePasswordItemHTMLRemplacement.replace("{Password.user}", this.listePasswordDonnee[numPassword].user);
-            listePasswordItemHTMLRemplacement = listePasswordItemHTMLRemplacement.replace("{Password.password}", this.listePasswordDonnee[numPassword].password);
-            listePasswordItemHTMLRemplacement = listePasswordItemHTMLRemplacement.replace("{Password.description}", this.listePasswordDonnee[numPassword].description);
-            listePasswordHTMLRemplacement += listePasswordItemHTMLRemplacement;
-        }
-
-        listePassword.innerHTML = listePasswordHTMLRemplacement;
-        */
-
         //Création stage EaselJS
         this.stage = new createjs.Stage("canvas-donnees");
         createjs.Ticker.addEventListener("tick", () => this.update());
@@ -109,58 +90,35 @@ class VuePrincipale{
         
         //Donnée: site web
         let site = new createjs.Text("Site: " + infosClient.site, Configuration.FONT, "black");
-        site.textAlign = "left";
-        site.x = forme.x + 0.05 * forme.width;
+        site.textAlign = Configuration.ALIGNEMENT_GAUCHE;
+        site.x = forme.x + Configuration.POS_GAUCHE * forme.width;
         site.y = forme.y + (forme.height/2 - site.getMeasuredHeight()/2);
     
-        //Donnée: mot de passe
+        //Donnée: utilisateur
         let utilisateur = new createjs.Text("Utilisateur: " + infosClient.utilisateur, Configuration.FONT, "black");
-        utilisateur.textAlign = "right";
-        utilisateur.x = forme.x + 0.95 * forme.width;
+        utilisateur.textAlign = Configuration.ALIGNEMENT_MILIEU;
+        utilisateur.x = forme.x + Configuration.POS_MILIEU * forme.width;
         utilisateur.y = forme.y + (forme.height / 2 - utilisateur.getMeasuredHeight()/2);
     
+         //Donnée: description
+         let description = new createjs.Text("Description: " + infosClient.description, Configuration.FONT, "black");
+         description.textAlign = Configuration.ALIGNEMENT_DROITE;
+         description.x = forme.x + Configuration.POS_DROITE * forme.width;
+         description.y = forme.y + (forme.height / 2 - description.getMeasuredHeight()/2);
+
+        //let info = creerInfo(forme, texte, alignement, position, )
+
         //Ajout des éléments au cadre
         // cadre.addChild(forme, site, mdp);
 
-        // //Animations de slide gauche-droite
+        forme.alpha = 0;
         this.stage.x = -forme.width;
+        //Animations de slide gauche-droite et apparition
         createjs.Tween.get(this.stage)
             .to({x:0}, Configuration.DUREE_ANIMATION, createjs.Ease.quadOut);
-
-        // //Apparition
-        forme.alpha = 0;
         createjs.Tween.get(forme)
             .to({alpha:1}, Configuration.DUREE_ANIMATION);
     
-        this.stage.addChild(forme, site, utilisateur);
+        this.stage.addChild(forme, site, utilisateur, description);
     }
 }
-
-
-
-
-{/* <ul id="liste-pass">
-<li>
-  <div class="item">
-      <table class="t1">
-          <tr>
-              <th>Site web</th>
-              <th>User</th>
-              <th>Mot de passe</th>
-              <th>Description</th>
-              <th>Modifier</th>
-          </tr>
-              
-          <div class="boite">
-              <tr>
-                  <td>{Password.website}</td>
-                  <td>{Password.user}</td>
-                  <td>{Password.password}</td>
-                  <td>{Password.description}</td>
-                  <td><a href="#pass/{Password.id}" class="liste-pass-item">Modifier</a></td>
-              </tr>
-          </div>
-      </table>       
-  </div>
-</li>
-</ul> */}
