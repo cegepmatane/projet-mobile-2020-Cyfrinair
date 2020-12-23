@@ -3,15 +3,33 @@ class Vue1{
         this.html = document.getElementById("html-vue-1").innerHTML;
         this.actionMouvementGlisse = null;
         this.enGlisse = false;
+        this.listeInfosClientDonnee = [];
     }
 
     afficher(){
         document.getElementsByTagName("body")[0].innerHTML = this.html;
         this.initialiserCaptureMouvementGlisser();
+
+        let listeInfosClient = document.getElementById("liste-infosClient");
+        const listeInfosClientItemHTML = listeInfosClient.innerHTML;
+        let listeInfosClientHTMLRemplacement = "";
+
+        for(var infosClient in this.listeInfosClientDonnee){
+            let listeInfosClientItemHTMLRemplacement = listeInfosClientItemHTML;
+            listeInfosClientItemHTMLRemplacement = listeInfosClientItemHTMLRemplacement.replace("{InfosClient.id}",this.listeInfosClientDonnee[infosClient].id);
+            listeInfosClientItemHTMLRemplacement = listeInfosClientItemHTMLRemplacement.replace("{InfosClient.id}",this.listeInfosClientDonnee[infosClient].id);
+            listeInfosClientItemHTMLRemplacement = listeInfosClientItemHTMLRemplacement.replace("{InfosClient.utilisateur}",this.listeInfosClientDonnee[infosClient].utilisateur);
+            listeInfosClientHTMLRemplacement += listeInfosClientItemHTMLRemplacement;
+        }
+        listeInfosClient.innerHTML = listeInfosClientHTMLRemplacement;
     }
 
     initialiserActionMouvementGlisseDroiteGaucheVue1(actionMouvementGlisse){
         this.actionMouvementGlisse = actionMouvementGlisse;
+    }
+
+    initialiserListeInfosClient(listeInfosClientDonnee){
+        this.listeInfosClientDonnee = listeInfosClientDonnee;
     }
 
     initialiserCaptureMouvementGlisser(){

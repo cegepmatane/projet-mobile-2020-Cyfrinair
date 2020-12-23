@@ -1,9 +1,10 @@
 class Application {
-    constructor(window, vue1, vue2, vue3){
+    constructor(window, infosClientDAO, vue1, vue2, vue3){
         this.window = window;
         this.vue1 = vue1;
         this.vue2 = vue2;
         this.vue3 = vue3;
+        this.infosClientDAO = infosClientDAO;
     
         this.capturerMouvements();
     }
@@ -17,8 +18,9 @@ class Application {
     }
 
     afficherVue1(){
-        this.vue1.afficher();
-        this.vue1.enGlisse = false;
+        this.infosClientDAO.listerInfosClient((data)=>{this.vue1.initialiserListeInfosClient(data);
+            this.vue1.afficher();
+            this.vue1.enGlisse = false;});
     }
 
     afficherVue2(){
@@ -45,4 +47,4 @@ class Application {
         this.capturerMouvements();
     }
 }
-new Application(window, new Vue1(), new Vue2(), new Vue3());
+new Application(window, new InfosClientDAO(), new Vue1(), new Vue2(), new Vue3());
