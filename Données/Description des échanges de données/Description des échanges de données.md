@@ -17,3 +17,7 @@
 - __*listerParNom*__ : prend en parametre un nom, retourne un model __*InfosCLient*__.
 
 - __*enregistrerInfosClient*__ : prend en parametre un model __*InfosCLient*__ pour l'enregistrer dans la base de donnée
+
+
+- lien des services
+https://cyfrinair.tikenix.me/ListeInfosClients.php
