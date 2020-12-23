@@ -4,6 +4,7 @@ class VuePrincipale{
         this.html = document.getElementById("html-vue-principale").innerHTML;
         this.stage = null;
         this.listeInfosClient = null;
+        this.manager = new CryptoManager();
     }
 
     initialiserListeInfosClient(listeInfosClient){
@@ -17,6 +18,10 @@ class VuePrincipale{
         this.stage = new createjs.Stage("canvas-donnees");
         createjs.Ticker.addEventListener("tick", () => this.update());
         createjs.Ticker.framerate = Configuration.TAUX_RAFRAICHISSEMENT;
+
+        //boutton de connection
+        document.getElementById('connection').addEventListener("click", () => { this.genererCleMaitre(); }, false);
+        document.getElementById('deconnection').addEventListener("click", () => { this.deconnection(); }, false);
 
         this.initialiserElementsGraphiques();
     }
@@ -72,12 +77,12 @@ class VuePrincipale{
         //Construction de chaque donnée dans un cadre
         let index = 0;
         this.listeInfosClient.forEach(infosClient => {
-            this.afficherDonnee(infosClient, index);
+            this.afficherDonnee(infosClient, index, null);
             index++;
         });
     }
     
-    afficherDonnee(infosClient, index) 
+    afficherDonnee(infosClient, index, listeMotDePasse) 
     {
         //Construction du cadre
         // let cadre = new createjs.Container();
@@ -119,6 +124,60 @@ class VuePrincipale{
         createjs.Tween.get(forme)
             .to({alpha:1}, Configuration.DUREE_ANIMATION);
     
-        this.stage.addChild(forme, site, utilisateur, description);
+        if (listeMotDePasse != null){
+            let motdepasse = new createjs.Text("Mot De Passe: " + listeMotDePasse[index + 1], Configuration.FONT, "black");
+            motdepasse.textAlign = "right";
+            motdepasse.x = forme.x + 0.95 * forme.width;
+            motdepasse.y = forme.y + (forme.height / 2 - motdepasse.getMeasuredHeight()/2);
+            this.stage.addChild(forme, site, utilisateur, motdepasse);
+        } else {
+            this.stage.addChild(forme, site, utilisateur);
+        }
+    }
+
+    genererCleMaitre(){
+        
+		let pseudo = document.getElementById('fullname').value;
+		let motdepasse = document.getElementById('masterpassword').value;
+
+        let valide = this.manager.mettreAJourMPW(pseudo, motdepasse);
+        
+        if (valide){
+            document.getElementById('connection').disabled = true;
+            document.getElementById('deconnection').disabled = false;
+        
+            let listeMotDePasse = [];
+            this.manager.obtenirlisteMotDePasse(this.listeInfosClient, (index, data)=>{
+                if (listeMotDePasse.length < this.listeInfosClient.length){
+                    listeMotDePasse[index] = data;
+                }
+                if (listeMotDePasse.length == this.listeInfosClient.length){
+                    console.log("FINI!!");
+
+                    this.stage.removeAllChildren();
+
+                    let index = 0;
+                    this.listeInfosClient.forEach(infosClient => {
+                        this.afficherDonnee(infosClient, index, listeMotDePasse);
+                        index++;
+                    });
+
+                }
+            });
+        }
+    }
+
+    deconnection(){
+        document.getElementById('fullname').value = "";
+		document.getElementById('masterpassword').value = "";
+
+        document.getElementById('connection').disabled = false;
+        document.getElementById('deconnection').disabled = true;
+
+        let index = 0;
+        this.listeInfosClient.forEach(infosClient => {
+            this.afficherDonnee(infosClient, index, null);
+            index++;
+        });
     }
 }
