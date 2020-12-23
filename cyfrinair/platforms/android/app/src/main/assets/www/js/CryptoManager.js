@@ -33,8 +33,6 @@ class CryptoManager{
 			alert("Veuillez vous connecter!");
 			return;
 		}
-		
-		console.log(client);
 
 		let value;
 		switch (client.type){

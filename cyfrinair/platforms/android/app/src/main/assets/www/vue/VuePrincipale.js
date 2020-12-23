@@ -5,6 +5,9 @@ class VuePrincipale{
         this.stage = null;
         this.listeInfosClient = null;
         this.manager = new CryptoManager();
+        this.monShakeEvent = new Shake({
+			threshold: this.sensibilitee
+		});
     }
 
     initialiserListeInfosClient(listeInfosClient){
@@ -20,8 +23,13 @@ class VuePrincipale{
         createjs.Ticker.framerate = Configuration.TAUX_RAFRAICHISSEMENT;
 
         //boutton de connection
-        document.getElementById('connection').addEventListener("click", () => { this.genererCleMaitre(); }, false);
+        document.getElementById('connection').addEventListener("click", () => { this.connection(); }, false);
         document.getElementById('deconnection').addEventListener("click", () => { this.deconnection(); }, false);
+
+        window.addEventListener('shake', () => { alert("SECOUSSES!"); this.deconnection(); }, false);
+
+		// débute l'écoute
+		this.monShakeEvent.start();
 
         this.initialiserElementsGraphiques();
     }
@@ -106,7 +114,7 @@ class VuePrincipale{
         }
     }
 
-    genererCleMaitre(){
+    connection(){
         
 		let pseudo = document.getElementById('fullname').value;
 		let motdepasse = document.getElementById('masterpassword').value;
@@ -123,7 +131,6 @@ class VuePrincipale{
                     listeMotDePasse[index] = data;
                 }
                 if (listeMotDePasse.length == this.listeInfosClient.length){
-                    console.log("FINI!!");
 
                     this.stage.removeAllChildren();
                     this.afficherCadresDonnees(listeMotDePasse);
