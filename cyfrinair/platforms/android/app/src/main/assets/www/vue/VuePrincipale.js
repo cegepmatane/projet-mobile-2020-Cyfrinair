@@ -4,6 +4,7 @@ class VuePrincipale{
         this.html = document.getElementById("html-vue-principale").innerHTML;
         this.stage = null;
         this.listeInfosClient = null;
+        this.modifierElement = null;
 
         this.enGlisse = false;
         this.actionMouvementGlisse = null;
@@ -16,6 +17,10 @@ class VuePrincipale{
         });
         
         this.connecter = false;
+    }
+
+    initialiserModifierElement(modifierElement){
+        this.modifierElement = modifierElement;
     }
 
     initialiserActionGlisseBasHaut(actionMouvementGlisse){
@@ -155,6 +160,8 @@ class VuePrincipale{
         } else {
             this.stage.addChild(forme, site, utilisateur, description);
         }
+
+        forme.addEventListener("click", () => this.modifierElement(infosClient));
     }
 
     connection(){

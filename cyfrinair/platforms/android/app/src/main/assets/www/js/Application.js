@@ -10,6 +10,7 @@ class Application{
 		
 		//Callbacks
         //this.vueAjouter.initialiserAjout(pass => this.ajouterPass(pass));
+        this.vuePrincipale.initialiserModifierElement(modifier => this.modifierInfosClient(modifier));
 
 		//lancement android
 		//document.addEventListener("deviceready", () => this.intialiserNavigation(), false);
@@ -20,6 +21,10 @@ class Application{
         this.afficherVuePrincipale();
         //Intégration gesture swipe vers le bas
         this.capturerMouvements();
+	}
+
+	modifierInfosClient(infosClient){
+	    this.vueModifier.afficher(infosClient);
 	}
 
     capturerMouvements(){

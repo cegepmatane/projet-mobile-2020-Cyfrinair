@@ -10,9 +10,12 @@ class VueModifier{
         this.AjouterPass = AjouterPass;
     }*/
 
-    afficher(){
+    afficher(infosClient){
         document.getElementsByTagName("body")[0].innerHTML = this.html;
         //document.getElementById("form-ajouter").addEventListener("submit", evenement => this.enregistrer(evenement));
+         document.getElementById("site").value = infosClient.site;
+         document.getElementById("utilisateur").value = infosClient.utilisateur;
+         document.getElementById("description").value = infosClient.description;
     }
 
     /*
