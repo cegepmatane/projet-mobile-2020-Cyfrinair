@@ -119,16 +119,13 @@ class VuePrincipale{
     }
 
     connection(){
-        
 		let pseudo = document.getElementById('fullname').value;
 		let motdepasse = document.getElementById('masterpassword').value;
 
+        document.getElementById('connection').disabled = true;
         let valide = this.manager.mettreAJourMPW(pseudo, motdepasse);
         
         if (valide){
-            document.getElementById('connection').disabled = true;
-            document.getElementById('deconnection').disabled = false;
-        
             let listeMotDePasse = [];
             this.manager.obtenirlisteMotDePasse(this.listeInfosClient, (index, data)=>{
                 if (listeMotDePasse.length < this.listeInfosClient.length){
@@ -137,10 +134,13 @@ class VuePrincipale{
                 if (listeMotDePasse.length == this.listeInfosClient.length){
 
                     this.connecter = true;
+					document.getElementById('deconnection').disabled = false;
                     this.stage.removeAllChildren();
                     this.afficherCadresDonnees(listeMotDePasse);
                 }
             });
+        } else {
+            document.getElementById('connection').disabled = false;
         }
     }
 
@@ -148,10 +148,9 @@ class VuePrincipale{
         document.getElementById('fullname').value = "";
 		document.getElementById('masterpassword').value = "";
 
-        document.getElementById('connection').disabled = false;
-        document.getElementById('deconnection').disabled = true;
-
         this.connecter = false;
+		document.getElementById('connection').disabled = false;
+        document.getElementById('deconnection').disabled = true;
         this.afficherCadresDonnees(null);
     }
 

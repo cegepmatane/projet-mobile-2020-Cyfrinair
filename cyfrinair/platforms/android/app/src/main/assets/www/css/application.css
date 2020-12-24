@@ -1,4 +1,7 @@
 
+.page{
+    background: linear-gradient(to right, #3D5069, #192943);
+}
 
 table{
     border-collapse: collapse;
@@ -11,12 +14,12 @@ th, td{
 
 #section_ajouter{
   text-align: center;
-  
 }
 
 h1{
   text-align: center;
   margin: 2% 0 2% 0;
+  color: white;
 }
 
 #input{
