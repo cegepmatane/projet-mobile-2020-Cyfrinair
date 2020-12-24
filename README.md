@@ -9,4 +9,6 @@ Nous allons réaliser un gestionnaire de mots de passe (Cyfrinair), qui va utili
 Secouer le téléphone permet de "verrouiller" l'application.
 La technologie de capteur utilise la librairie ShakeJs : 
 ```https://github.com/alexgibson/shake.js```
-
+<br>
+Vidéo : <br>
+https://youtu.be/Ozt3YwC83Pg
