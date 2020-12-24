@@ -5,9 +5,13 @@ class VuePrincipale{
         this.stage = null;
         this.listeInfosClient = null;
         this.manager = new CryptoManager();
+        
+        this.sensibilitee = 15;
         this.monShakeEvent = new Shake({
 			threshold: this.sensibilitee
-		});
+        });
+        
+        this.connecter = false;
     }
 
     initialiserListeInfosClient(listeInfosClient){
@@ -26,7 +30,7 @@ class VuePrincipale{
         document.getElementById('connection').addEventListener("click", () => { this.connection(); }, false);
         document.getElementById('deconnection').addEventListener("click", () => { this.deconnection(); }, false);
 
-        window.addEventListener('shake', () => { alert("SECOUSSES!"); this.deconnection(); }, false);
+        window.addEventListener('shake', () => { if (this.connecter) {alert("SECOUSSES!"); this.deconnection();} }, false);
 
 		// débute l'écoute
 		this.monShakeEvent.start();
@@ -132,6 +136,7 @@ class VuePrincipale{
                 }
                 if (listeMotDePasse.length == this.listeInfosClient.length){
 
+                    this.connecter = true;
                     this.stage.removeAllChildren();
                     this.afficherCadresDonnees(listeMotDePasse);
                 }
@@ -146,6 +151,7 @@ class VuePrincipale{
         document.getElementById('connection').disabled = false;
         document.getElementById('deconnection').disabled = true;
 
+        this.connecter = false;
         this.afficherCadresDonnees(null);
     }
 
