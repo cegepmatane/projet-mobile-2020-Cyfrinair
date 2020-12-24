@@ -119,10 +119,10 @@ class VuePrincipale{
     }
 
     connection(){
-        
 		let pseudo = document.getElementById('fullname').value;
 		let motdepasse = document.getElementById('masterpassword').value;
 
+        document.getElementById('connection').disabled = true;
         let valide = this.manager.mettreAJourMPW(pseudo, motdepasse);
         
         if (valide){
@@ -134,12 +134,13 @@ class VuePrincipale{
                 if (listeMotDePasse.length == this.listeInfosClient.length){
 
                     this.connecter = true;
-					document.getElementById('connection').disabled = true;
 					document.getElementById('deconnection').disabled = false;
                     this.stage.removeAllChildren();
                     this.afficherCadresDonnees(listeMotDePasse);
                 }
             });
+        } else {
+            document.getElementById('connection').disabled = false;
         }
     }
 
