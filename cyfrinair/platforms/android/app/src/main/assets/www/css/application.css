@@ -1,7 +1,14 @@
-
-.page{
-    background: linear-gradient(to right, #3D5069, #192943);
+*{
+  margin: 0;
+  padding: 0;
 }
+
+body{
+  box-sizing: border-box;
+  background: linear-gradient(to right, #3D5069, #192943);
+  color: white;
+}
+
 
 table{
     border-collapse: collapse;
@@ -10,7 +17,7 @@ table{
 th, td{
     border: 1px solid black;
     padding: 10px;
-  }
+}
 
 #section_ajouter{
   text-align: center;
@@ -18,7 +25,7 @@ th, td{
 
 h1{
   text-align: center;
-  margin: 2% 0 2% 0;
+  margin: 2% auto;
   color: white;
 }
 
@@ -43,6 +50,34 @@ label{
 }
 
 canvas{
-  width: 60%;
-  
+  width: 90%;
+  margin: 0 5%;
+      border: 1px solid green;
+}
+
+div p{
+  text-align: center;
+  margin: 1% auto;
+}
+
+#swipe-haut{
+    margin: 20% 30%;
+    border: 1px solid red;
+}
+
+#titres{
+    width: 100%;
+    display: flex;
+    flex-basis: 20%;
+}
+
+#titres p{
+    margin-top: 20px;
+    width:20%;
+}
+
+.tirable{
+    border: 1px solid black;
+    width: 100%;
+    height: 200px;
 }

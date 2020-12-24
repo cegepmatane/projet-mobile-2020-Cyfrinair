@@ -1,9 +1,9 @@
 class Configuration
 {
     static DUREE_ANIMATION = 1000;
-    static HAUTEUR_DONNEE = 100;
+    static HAUTEUR_DONNEE = 70;
     static MARGIN_DONNEE = 15;
-    static FONT = "24pt Arial";
+    static FONT = "12pt Arial";
     static TAUX_RAFRAICHISSEMENT = 60;
     static SCALE_CADENAS = 0.3;
 

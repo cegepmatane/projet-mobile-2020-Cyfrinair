@@ -4,6 +4,10 @@ class VuePrincipale{
         this.html = document.getElementById("html-vue-principale").innerHTML;
         this.stage = null;
         this.listeInfosClient = null;
+
+        this.enGlisse = false;
+        this.actionMouvementGlisse = null;
+
         this.manager = new CryptoManager();
         
         this.sensibilitee = 15;
@@ -14,12 +18,47 @@ class VuePrincipale{
         this.connecter = false;
     }
 
+    initialiserActionGlisseBasHaut(actionMouvementGlisse){
+        this.actionMouvementGlisse = actionMouvementGlisse;
+    }
+
+    initialiserCaptureMouvementGlisser(){
+        const nombrePointEntree = 1;
+        const tempsMouvementGlisse = 100;
+        const vitesseMouvement = 0.25;
+        let aireToucher = document.getElementById('toucharea');
+        let region = new ZingTouch.Region(aireToucher);
+        let glisse = new ZingTouch.Swipe({
+            numInputs: nombrePointEntree,
+            maxRestTime: tempsMouvementGlisse,
+            escapeVelocity: vitesseMouvement
+        });
+        
+        region.bind(aireToucher, glisse, (evenement) => this.confirmerGlisse(evenement));
+    }
+
+    confirmerGlisse(evenement){
+        const donneeDuMouvement = 0;
+        let direction = (evenement.detail.data[donneeDuMouvement].currentDirection);
+        console.log(direction);
+        if(direction > 20 && direction <= 160 ) //intervalle qui definit un swipe de bas en haut
+        {
+            if(!this.enGlisse){
+                this.actionMouvementGlisse();
+                this.enGlisse = true;
+            }
+        }
+    }
+
     initialiserListeInfosClient(listeInfosClient){
         this.listeInfosClient = listeInfosClient;
     }
 
     afficher(){
         document.getElementsByTagName("body")[0].innerHTML = this.html;
+
+        //Gesture swipe
+        this.initialiserCaptureMouvementGlisser();
 
         //Création stage EaselJS
         this.stage = new createjs.Stage("canvas-donnees");

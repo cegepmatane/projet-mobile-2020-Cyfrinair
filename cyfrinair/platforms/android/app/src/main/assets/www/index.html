@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
 
-<link rel="stylesheet" href="css/application.css">
-<script src="createjs/easeljs/lib/easeljs.min.js"></script>
-<script src="createjs/tweenjs/lib/tweenjs.min.js"></script>
-<script src="modele/InfosClient.js"></script>
-<script src="donnee/InfosClientDAO.js"></script>
-<script src="js/Configuration.js"></script>
+    <link rel="stylesheet" href="css/application.css">
+    <script src="createjs/easeljs/lib/easeljs.min.js"></script>
+    <script src="createjs/tweenjs/lib/tweenjs.min.js"></script>
 
-<script src="js/shake.js"></script>
-<script src="js/lib/ES6.js"></script>
-<script src="js/CryptoManager.js"></script>
-<script src="js/lib/setImmediate-polyfill.js"></script>
-<script src="js/lib/pbkdf2.js"></script>
-<script src="js/lib/scrypt.js"></script>
-<script src="js/lib/mpw.js"></script>
+    <script src='zingtouch-master/dist/zingtouch.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<script src="vue/VueAjouter.js"></script>
-<script src="vue/VueModifier.js"></script>
-<script src="vue/VuePrincipale.js"></script>
-<script src="cordova.js"></script>
-<script defer src="js/Application.js"></script>
-<title>Page principale</title>
+    <script src="js/shake.js"></script>
+    <script src="js/lib/ES6.js"></script>
+    <script src="js/CryptoManager.js"></script>
+    <script src="js/lib/setImmediate-polyfill.js"></script>
+    <script src="js/lib/pbkdf2.js"></script>
+    <script src="js/lib/scrypt.js"></script>
+    <script src="js/lib/mpw.js"></script>
+
+    <script src="modele/InfosClient.js"></script>
+    <script src="donnee/InfosClientDAO.js"></script>
+    <script src="js/Configuration.js"></script>
+    <script src="vue/VueAjouter.js"></script>
+    <script src="vue/VueModifier.js"></script>
+    <script src="vue/VuePrincipale.js"></script>
+    <script src="cordova.js"></script>
+    <script defer src="js/Application.js"></script>
+    <title>Page principale</title>
 </head>
 <body>
         <script type="plain/text" id="html-vue-shake">
@@ -33,14 +36,25 @@
 
         <div>Chargement de l'application . . .</div>
         <script type="plain/text" id="html-vue-principale">
-            <p><label>Pseudo: <input id="fullname" placeholder="John Smith"></label></p>
-            <p><label>Mot de passe: <input id="masterpassword" type=password placeholder=Password></label></p>
-            <p><button id="connection">connection</button><button id="deconnection" disabled>déconnection</button></p>
+            <h1>Cyfrinair</h1>
+            <div>
+                <p><label>Pseudo: <input id="fullname" placeholder="John Smith"></label></p>
+                <p><label>Mot de passe: <input id="masterpassword" type=password placeholder=Password></label></p>
+                <p><button id="connection">connexion</button><button id="deconnection" disabled>déconnexion</button></p>
+            </div>
+            <div id="titres">
+                <p>Site</p>
+                <p>Utilisateur</p>
+                <p>Description</p>
+                <p>Mot de passe</p>
+            </div>
             <div class="page">
-                <h1>Principale</h1>
                 <section id="section">
                     <canvas id="canvas-donnees"></canvas>
-                    <a href="#ajouter" class="button"><img src="img/add.png" alt="Valider" width="50" height="50"></a>
+                    <div class="tirable" id="toucharea">
+                        <img id="swipe-haut" src="img/swipe-haut.png" alt="Fleche vers le haut"></img>
+                    </div>
+                    <p>Tirez vers la flèche vers le haut pour ajouter une entrée</p>
                 </section>
             </div>
         </script>
@@ -54,7 +68,7 @@
                         <label for="web">Site Web</label>
                         <input type="web" id="input" name="web">
                     </br>
-                        <label for="user">User</label>
+                        <label for="user">Utilisateur</label>
                         <input type="user" id="input" name="user">
                     </br>
                         <label for="description">Description</label>
@@ -80,7 +94,7 @@
                         <label for="web">Site Web</label>
                         <input type="web" id="input" name="web">
                     </br>
-                        <label for="user">User</label>
+                        <label for="user">Utilisateur</label>
                         <input type="user" id="input" name="user">
                     </br>
                         <label for="description">Description</label>
