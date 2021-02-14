@@ -1,16 +1,16 @@
 class Application{
 	
-	constructor(window, vuePrincipale, vueAjouter, vueModifier, infosClientDAO){
+	constructor(window, vuePrincipale, vueAjouter, vueModifier, vueSupprimer, infosClientDAO){
         this.window = window;
         this.vuePrincipale = vuePrincipale;
         this.vueAjouter = vueAjouter;
         this.vueModifier = vueModifier;
+        this.vueSupprimer = vueSupprimer;
         this.infosClientDAO = infosClientDAO;
-		
-		
-		//Callbacks
-        //this.vueAjouter.initialiserAjout(pass => this.ajouterPass(pass));
+
+		//Callbacks pour l'affichage
         this.vuePrincipale.initialiserModifierElement(modifier => this.modifierInfosClient(modifier));
+        this.vuePrincipale.initialiserSupprimerElement(supprimer => this.supprimerInfosClient(supprimer));
 
 		//lancement android
 		//document.addEventListener("deviceready", () => this.intialiserNavigation(), false);
@@ -19,7 +19,6 @@ class Application{
         //this.naviguer();
 
         this.afficherVuePrincipale();
-        //Intégration gesture swipe vers le bas
         this.capturerMouvements();
 	}
 
@@ -27,8 +26,14 @@ class Application{
 	    this.vueModifier.afficher(infosClient);
 	}
 
+	supprimerInfosClient(infosClient){
+	    this.vueSupprimer.afficher(infosClient);
+	}
+
     capturerMouvements(){
+        //Initialisation des swipes possibles depuis la vue principale
         this.vuePrincipale.initialiserActionGlisseBasHaut(() => this.actionMouvementGlisseVersBas());
+
         this.vueAjouter.initialiserActionGlisseHautBas(() => this.actionMouvementGlisseVersHaut());
     }
 
@@ -39,7 +44,6 @@ class Application{
         });
 
         this.vuePrincipale.enGlisse = false;
-
     }
 
     afficherVueAjouter(){
@@ -89,4 +93,9 @@ class Application{
     */
 }
 
-new Application(window, new VuePrincipale(), new VueAjouter(), new VueModifier(), new InfosClientDAO());
+new Application(window,
+                new VuePrincipale(),
+                new VueAjouter(),
+                new VueModifier(),
+                new VueSupprimer(),
+                new InfosClientDAO());

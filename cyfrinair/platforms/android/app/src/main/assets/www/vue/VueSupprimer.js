@@ -1,7 +1,7 @@
-class VueModifier{
+class VueSupprimer{
 
     constructor(){
-        this.html = document.getElementById("html-vue-modifier").innerHTML;
+        this.html = document.getElementById("html-vue-supprimer").innerHTML;
     }
 
     afficher(infosClient){

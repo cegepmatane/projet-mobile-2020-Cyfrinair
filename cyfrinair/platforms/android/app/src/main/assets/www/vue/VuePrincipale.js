@@ -5,6 +5,7 @@ class VuePrincipale{
         this.stage = null;
         this.listeInfosClient = null;
         this.modifierElement = null;
+        this.supprimerElement = null;
 
         this.enGlisse = false;
         this.actionMouvementGlisse = null;
@@ -23,15 +24,19 @@ class VuePrincipale{
         this.modifierElement = modifierElement;
     }
 
+    initialiserSupprimerElement(supprimerElement){
+            this.supprimerElement = supprimerElement;
+    }
+
     initialiserActionGlisseBasHaut(actionMouvementGlisse){
         this.actionMouvementGlisse = actionMouvementGlisse;
     }
 
-    initialiserCaptureMouvementGlisser(){
+    initialiserCaptureMouvementGlisser(tirable){
         const nombrePointEntree = 1;
         const tempsMouvementGlisse = 100;
         const vitesseMouvement = 0.25;
-        let aireToucher = document.getElementById('toucharea');
+        let aireToucher = tirable;
         let region = new ZingTouch.Region(aireToucher);
         let glisse = new ZingTouch.Swipe({
             numInputs: nombrePointEntree,
@@ -62,8 +67,9 @@ class VuePrincipale{
     afficher(){
         document.getElementsByTagName("body")[0].innerHTML = this.html;
 
-        //Gesture swipe
-        this.initialiserCaptureMouvementGlisser();
+        //Gesture swipe vers l'ajout
+        let flecheAjout = document.getElementById('toucharea');
+        this.initialiserCaptureMouvementGlisser(flecheAjout);
 
         //Création stage EaselJS
         this.stage = new createjs.Stage("canvas-donnees");
@@ -91,39 +97,11 @@ class VuePrincipale{
     {
         this.stage.canvas.width = window.innerWidth;
         //Permet d'adapter la taille du canvas selon le nombre de données à afficher
-        this.stage.canvas.height = (Configuration.HAUTEUR_DONNEE + Configuration.MARGIN_DONNEE) * this.listeInfosClient.length;	
-        /*
-        let image = new Image();
-        image.src = "img/lock-shape.svg"; 
-        image.addEventListener("load", evenement => this.afficherCadenas(evenement));
-        */
+        this.stage.canvas.height = (Configuration.HAUTEUR_DONNEE + Configuration.MARGIN_DONNEE) * this.listeInfosClient.length;
 
         //Sans changement de canvas, on appelle directement afficherCadresDonnees()
         this.afficherCadresDonnees(null);
     }
-
-    /*
-    afficherCadenas(evenement)
-    {
-        let imageCadenas = evenement.target;
-        let cadenas = new createjs.Bitmap(imageCadenas);
-    
-        cadenas.scale = Configuration.SCALE_CADENAS;
-        //Permet de centrer le cadenas en X et le positionner au dessus du canvas pour animation
-        cadenas.x = (this.stage.canvas.width - cadenas.scale * cadenas.image.width) / 2;
-        cadenas.y = -cadenas.image.height;
-    
-        //Centrer le cadenas en Y
-        let centreY = (this.stage.canvas.height - cadenas.scale * cadenas.image.height) / 2;
-        
-        //Animation descendre
-        createjs.Tween.get(cadenas)
-            .to({y:centreY}, Configuration.DUREE_ANIMATION, createjs.Ease.bounceOut)
-            .call(() => this.afficherCadresDonnees());
-
-        this.stage.addChild(cadenas);
-    }
-    */
 
     afficherCadresDonnees(listeMdp)
     {
@@ -145,8 +123,8 @@ class VuePrincipale{
         forme.graphics.beginFill("grey").drawRect(0, 0, forme.width, forme.height);
 
         let site = this.creerInfo(forme, infosClient.site, Configuration.ALIGNEMENT_GAUCHE, Configuration.POS_GAUCHE);
-        let utilisateur = this.creerInfo(forme, infosClient.utilisateur, Configuration.ALIGNEMENT_MILIEU, Configuration.POS_MILIEU_GAUCHE);
-        let description = this.creerInfo(forme, infosClient.description, Configuration.ALIGNEMENT_DROITE, Configuration.POS_MILIEU_DROITE);
+        let utilisateur = this.creerInfo(forme, infosClient.utilisateur, Configuration.ALIGNEMENT_GAUCHE, Configuration.POS_MILIEU_GAUCHE);
+        //let description = this.creerInfo(forme, infosClient.description, Configuration.ALIGNEMENT_DROITE, Configuration.POS_MILIEU_DROITE);
 
         forme.alpha = 0;
         this.stage.x = -forme.width;
@@ -156,12 +134,12 @@ class VuePrincipale{
     
         if (listeMotDePasse != null){
             let motDePasse = this.creerInfo(forme, listeMotDePasse[index + 1], Configuration.ALIGNEMENT_DROITE, Configuration.POS_DROITE);
-            this.stage.addChild(forme, site, utilisateur, description, motDePasse);
+            this.stage.addChild(forme, site, utilisateur, motDePasse);
         } else {
-            this.stage.addChild(forme, site, utilisateur, description);
+            this.stage.addChild(forme, site, utilisateur);
         }
 
-        forme.addEventListener("click", () => this.modifierElement(infosClient));
+        forme.addEventListener("click", () => this.supprimerElement(infosClient));
     }
 
     connection(){

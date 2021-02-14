@@ -2,10 +2,11 @@ class InfosClientDAO{
     
   constructor(){
       this.listeInfosClient = [];
+      this.URL_LISTE = "https://cyfrinair.freehv.me/ListeInfosClients.php";
   }
 
   initialiserListeInfosClient(listeInfosClient){
-      console.log("initialiserListeInfosClient"+listeInfosClient);
+      //console.log("initialiserListeInfosClient"+listeInfosClient);
       this.listeInfosClient = listeInfosClient;
   }
 
@@ -25,7 +26,7 @@ class InfosClientDAO{
   };
 
   listerInfosClient(listeInfosClientDonnee){
-    this.getJSON('https://cyfrinair.tikenix.me/ListeInfosClients.php',
+    this.getJSON(this.URL_LISTE,
     (erreur, data) => {
       if (erreur !== null) {
         alert('Erreur InfosClientDAO::listerInfosClient: ' + erreur);

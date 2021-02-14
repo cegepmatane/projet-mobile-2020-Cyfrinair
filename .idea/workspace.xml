@@ -18,7 +18,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/cyfrinair/platforms/android" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cyfrinair/platforms/android" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -34,9 +34,13 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1608305396928">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1613062408739">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/-1920.71.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1608305396928" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.71.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1613062408739" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1613062474817">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/-1920.71.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1613062474817" />
   </component>
 </project>

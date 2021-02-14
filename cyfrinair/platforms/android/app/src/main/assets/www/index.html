@@ -23,6 +23,7 @@
     <script src="js/Configuration.js"></script>
     <script src="vue/VueAjouter.js"></script>
     <script src="vue/VueModifier.js"></script>
+    <script src="vue/VueSupprimer.js"></script>
     <script src="vue/VuePrincipale.js"></script>
     <script src="cordova.js"></script>
     <script defer src="js/Application.js"></script>
@@ -45,7 +46,7 @@
             <div id="titres">
                 <p>Site</p>
                 <p>Utilisateur</p>
-                <p>Description</p>
+<!--            <p>Description</p>-->
                 <p>Mot de passe</p>
             </div>
             <div class="page">
@@ -99,6 +100,32 @@
                     </br>
                         <label for="description">Description</label>
                         <input type="text" id="description" name="description">
+                    </form>
+                </section>
+
+                <div id="mesBouttons">
+                    <a href="index.html" class="button"><img src="img/retour.png" alt="Retour" width="50" height="50"></a>
+                    <a href="#" class="button"><img src="img/Accept.png" alt="Valider" width="50" height="50"></a>
+                </div>
+            </div>
+        </script>
+
+        <script type="plain/text" id="html-vue-supprimer">
+            <div class="page">
+                <h1>Supprimer un compte</h1>
+
+                <section id="section-supprimer">
+                    <form>
+                        <label for="site">Site Web</label>
+                        <input type="text" id="site" name="site" disabled>
+                    </br>
+                        <label for="utilisateur">Utilisateur</label>
+                        <input type="text" id="utilisateur" name="utilisateur" disabled>
+                    </br>
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" disabled>
+                     <br>
+                        <p style="color: red;">Êtes-vous certain-e de vouloir supprimer ce compte ?</p>
                     </form>
                 </section>
 
