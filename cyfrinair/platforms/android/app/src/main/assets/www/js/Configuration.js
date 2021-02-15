@@ -18,4 +18,9 @@ class Configuration
     static POS_MILIEU = 0.50;
     static POS_MILIEU_DROITE = 0.65;
     static POS_DROITE = 0.95;
+
+    static XMAX_SUPP = 0.9;
+
+
+
 }

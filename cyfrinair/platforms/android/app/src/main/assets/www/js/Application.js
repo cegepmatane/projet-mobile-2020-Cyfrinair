@@ -33,7 +33,8 @@ class Application{
     capturerMouvements(){
         //Initialisation des swipes possibles depuis la vue principale
         this.vuePrincipale.initialiserActionGlisseBasHaut(() => this.actionMouvementGlisseVersBas());
-
+        //Le swipe vers la gauche se fait sur les items pour les supprimer
+        //this.vuePrincipale.initialiserActionGlisseGaucheDroite(() => this.actionMouvementGlisseVersGauche());
         this.vueAjouter.initialiserActionGlisseHautBas(() => this.actionMouvementGlisseVersHaut());
     }
 
@@ -57,6 +58,10 @@ class Application{
 
     actionMouvementGlisseVersHaut(){
         this.afficherVuePrincipale();
+    }
+
+    actionMouvementGlisseVersGauche(infosClient){
+        this.afficherVueSupprimer(infosClient);
     }
 
     /*

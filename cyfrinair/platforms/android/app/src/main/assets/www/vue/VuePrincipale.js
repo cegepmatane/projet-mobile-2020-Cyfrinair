@@ -18,6 +18,7 @@ class VuePrincipale{
         });
         
         this.connecter = false;
+
     }
 
     initialiserModifierElement(modifierElement){
@@ -43,7 +44,7 @@ class VuePrincipale{
             maxRestTime: tempsMouvementGlisse,
             escapeVelocity: vitesseMouvement
         });
-        
+
         region.bind(aireToucher, glisse, (evenement) => this.confirmerGlisse(evenement));
     }
 
@@ -51,7 +52,10 @@ class VuePrincipale{
         const donneeDuMouvement = 0;
         let direction = (evenement.detail.data[donneeDuMouvement].currentDirection);
         console.log(direction);
-        if(direction > 20 && direction <= 160 ) //intervalle qui definit un swipe de bas en haut
+        //Indique en degrés la réduction à appliquer sur la direction de swipe
+        let reductionSens = 20;
+        console.log(evenement.detail.data);
+        if(direction > 0 + reductionSens && direction <= 180 - reductionSens )
         {
             if(!this.enGlisse){
                 this.actionMouvementGlisse();
@@ -115,12 +119,17 @@ class VuePrincipale{
     
     afficherDonnee(infosClient, index, listeMotDePasse) 
     {
+        let conteneur = new createjs.Container();
+        conteneur.width = this.stage.canvas.width;
+
         //Construction du cadre
         let forme = new createjs.Shape();
         forme.width = this.stage.canvas.width;
         forme.height = Configuration.HAUTEUR_DONNEE;
         forme.y =  index*(Configuration.HAUTEUR_DONNEE + Configuration.MARGIN_DONNEE);
         forme.graphics.beginFill("grey").drawRect(0, 0, forme.width, forme.height);
+
+        conteneur.addChild(forme);
 
         let site = this.creerInfo(forme, infosClient.site, Configuration.ALIGNEMENT_GAUCHE, Configuration.POS_GAUCHE);
         let utilisateur = this.creerInfo(forme, infosClient.utilisateur, Configuration.ALIGNEMENT_GAUCHE, Configuration.POS_MILIEU_GAUCHE);
@@ -131,7 +140,7 @@ class VuePrincipale{
         //Animations de slide gauche-droite et apparition
         createjs.Tween.get(this.stage).to({x:0}, Configuration.DUREE_ANIMATION, createjs.Ease.quadOut);
         createjs.Tween.get(forme).to({alpha:1}, Configuration.DUREE_ANIMATION);
-    
+
         if (listeMotDePasse != null){
             let motDePasse = this.creerInfo(forme, listeMotDePasse[index + 1], Configuration.ALIGNEMENT_DROITE, Configuration.POS_DROITE);
             this.stage.addChild(forme, site, utilisateur, motDePasse);
@@ -139,7 +148,28 @@ class VuePrincipale{
             this.stage.addChild(forme, site, utilisateur);
         }
 
-        forme.addEventListener("click", () => this.supprimerElement(infosClient));
+        createjs.Touch.enable(this.stage);
+
+        //let flecheAjout = document.getElementById('toucharea');
+        //this.initialiserCaptureMouvementGlisser(forme);
+        //forme.addEventListener("click", () => this.supprimerElement(infosClient));
+
+        var positionInitialeForme = forme.x;
+        var that = this;
+        forme.on("pressmove", function(evt){
+            //console.log(event.target);
+            evt.target.x = evt.stageX - positionInitialeForme;
+            evt.target.alpha = 1 - evt.target.x / evt.target.width;
+        })
+        forme.on("pressup", (evt) => {
+            if(forme.x > Configuration.XMAX_SUPP*forme.width){
+                that.supprimerElement(infosClient);
+            }
+            else{
+                forme.x = positionInitialeForme;
+                evt.target.alpha = 1;
+            }
+        })
     }
 
     connection(){
@@ -184,6 +214,7 @@ class VuePrincipale{
         information.textAlign = alignement;
         information.x = forme.x + positionnement * forme.width;
         information.y = forme.y + (forme.height / 2 - information.getMeasuredHeight()/2);
+        information.mouseChildren = false;
         return information;
     }
 }

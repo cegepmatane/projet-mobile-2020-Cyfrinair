@@ -26,8 +26,7 @@ class InfosClientDAO{
   };
 
   listerInfosClient(listeInfosClientDonnee){
-    this.getJSON(this.URL_LISTE,
-    (erreur, data) => {
+    this.getJSON(this.URL_LISTE, (erreur, data) => {
       if (erreur !== null) {
         alert('Erreur InfosClientDAO::listerInfosClient: ' + erreur);
       } 
