@@ -10,7 +10,10 @@ class Application{
 
 		//Callbacks pour l'affichage
         this.vuePrincipale.initialiserModifierElement(modifier => this.modifierInfosClient(modifier));
-        this.vuePrincipale.initialiserSupprimerElement(supprimer => this.supprimerInfosClient(supprimer));
+        this.vuePrincipale.initialiserSupprimerElement((infoClient, index) => this.naviguerSupprimerInfoClient(infoClient, index));
+
+        //Callbacks DAO
+        this.vueSupprimer.initialiserActionSupprimerInfoClient(infoClient => this.actionSupprimerInfoClient(infoClient));
 
 		//lancement android
 		//document.addEventListener("deviceready", () => this.intialiserNavigation(), false);
@@ -26,15 +29,18 @@ class Application{
 	    this.vueModifier.afficher(infosClient);
 	}
 
-	supprimerInfosClient(infosClient){
+	naviguerSupprimerInfoClient(infosClient){
 	    this.vueSupprimer.afficher(infosClient);
+	}
+
+	actionSupprimerInfoClient(infoClient){
+	    this.infosClientDAO.supprimerInfoClient(infoClient);
 	}
 
     capturerMouvements(){
         //Initialisation des swipes possibles depuis la vue principale
         this.vuePrincipale.initialiserActionGlisseBasHaut(() => this.actionMouvementGlisseVersBas());
         //Le swipe vers la gauche se fait sur les items pour les supprimer
-        //this.vuePrincipale.initialiserActionGlisseGaucheDroite(() => this.actionMouvementGlisseVersGauche());
         this.vueAjouter.initialiserActionGlisseHautBas(() => this.actionMouvementGlisseVersHaut());
     }
 

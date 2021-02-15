@@ -19,7 +19,8 @@ class Configuration
     static POS_MILIEU_DROITE = 0.65;
     static POS_DROITE = 0.95;
 
-    static XMAX_SUPP = 0.9;
+    //Coefficient pour la distance à glisser avant de supprimer un compte
+    static DISTANCE_X_MAX_SUPP = 0.9;
 
 
 

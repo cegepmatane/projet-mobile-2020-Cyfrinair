@@ -115,24 +115,23 @@
                 <h1>Supprimer un compte</h1>
 
                 <section id="section-supprimer">
-                    <form>
+                    <form method="post" id="formulaire-supprimer">
                         <label for="site">Site Web</label>
-                        <input type="text" id="site" name="site" disabled>
-                    </br>
+                        <input type="text" id="site" name="site" disabled/>
+                        <br>
                         <label for="utilisateur">Utilisateur</label>
-                        <input type="text" id="utilisateur" name="utilisateur" disabled>
-                    </br>
+                        <input type="text" id="utilisateur" name="utilisateur" disabled/>
+                        <br>
                         <label for="description">Description</label>
-                        <input type="text" id="description" name="description" disabled>
-                     <br>
-                        <p style="color: red;">Êtes-vous certain-e de vouloir supprimer ce compte ?</p>
+                        <input type="text" id="description" name="description" disabled/>
+                        <br>
+                        <p style="color: red;">Êtes-vous certain(e) de vouloir supprimer ce compte ?</p>
+                        <div id="mesBouttons">
+                            <a href="index.html" class="button"><img src="img/retour.png" alt="Retour" width="50" height="50"></a>
+                            <input type="image" name="action-valider-suppression" src="img/Accept.png" alt="Valider suppression" width="50" height="50"/>
+                        </div>
                     </form>
                 </section>
-
-                <div id="mesBouttons">
-                    <a href="index.html" class="button"><img src="img/retour.png" alt="Retour" width="50" height="50"></a>
-                    <a href="#" class="button"><img src="img/Accept.png" alt="Valider" width="50" height="50"></a>
-                </div>
             </div>
         </script>
     </body>

@@ -4,25 +4,23 @@ class VueSupprimer{
         this.html = document.getElementById("html-vue-supprimer").innerHTML;
     }
 
-    afficher(infosClient){
+    afficher(infoClient){
         document.getElementsByTagName("body")[0].innerHTML = this.html;
-        //document.getElementById("form-ajouter").addEventListener("submit", evenement => this.enregistrer(evenement));
-         document.getElementById("site").value = infosClient.site;
-         document.getElementById("utilisateur").value = infosClient.utilisateur;
-         document.getElementById("description").value = infosClient.description;
+        this.infoClient = infoClient;
+
+         document.getElementById("site").value = infoClient.site;
+         document.getElementById("utilisateur").value = infoClient.utilisateur;
+         document.getElementById("description").value = infoClient.description;
+
+        this.formulaire = document.getElementById("formulaire-supprimer");
+        this.formulaire.addEventListener("submit", (evenement) => this.supprimerInfoClient(evenement));
     }
 
-    /*
-    enregistrer(evenement){
-        evenement.preventDefault();
-
-        let website = doument.getElementById("password-website").value;
-        let user = doument.getElementById("password-user").value;
-        let password = genererPassword();
-        let description = doument.getElementById("password-description").value;
-
-        this.ajouterPass(new Password(website, user, password, description, null))
+    initialiserActionSupprimerInfoClient(actionSupprimer){
+        this.actionSupprimer = actionSupprimer;
     }
 
-    */
+    supprimerInfoClient(evenement){
+        this.actionSupprimer(this.infoClient);
+    }
 }

@@ -149,27 +149,25 @@ class VuePrincipale{
         }
 
         createjs.Touch.enable(this.stage);
-
-        //let flecheAjout = document.getElementById('toucharea');
-        //this.initialiserCaptureMouvementGlisser(forme);
-        //forme.addEventListener("click", () => this.supprimerElement(infosClient));
-
-        var positionInitialeForme = forme.x;
         var that = this;
+
         forme.on("pressmove", function(evt){
-            //console.log(event.target);
-            evt.target.x = evt.stageX - positionInitialeForme;
+            evt.target.x = evt.stageX;
             evt.target.alpha = 1 - evt.target.x / evt.target.width;
-        })
+            site.alpha = utilisateur.alpha = evt.target.alpha;
+        });
+
         forme.on("pressup", (evt) => {
-            if(forme.x > Configuration.XMAX_SUPP*forme.width){
-                that.supprimerElement(infosClient);
+            if(forme.x > Configuration.DISTANCE_X_MAX_SUPP*forme.width){
+                that.supprimerElement(infosClient, index);
             }
             else{
                 forme.x = positionInitialeForme;
                 evt.target.alpha = 1;
             }
-        })
+        });
+
+        forme.addEventListener("click", () => this.modifierElement(infosClient));
     }
 
     connection(){
