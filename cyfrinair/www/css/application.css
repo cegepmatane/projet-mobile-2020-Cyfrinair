@@ -1,4 +1,7 @@
 
+body{
+  background-image: linear-gradient(#00008B, blue);
+}
 
 table{
     border-collapse: collapse;
@@ -37,6 +40,13 @@ label{
 .button{
   margin-left: 10%;
   margin-right: 10%;
+
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 20px;
+  color: #FFF;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: 200;
 }
 
 canvas{
